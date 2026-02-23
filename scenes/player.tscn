@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bibnqau26hlak"]
+
+[ext_resource type="Texture2D" uid="uid://cqind2rv578at" path="res://assets/RacingCar.png" id="1_3vyb7"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Car" type="Sprite2D" parent="."]
+rotation = -1.5707964
+scale = Vector2(0.042803004, 0.03830204)
+texture = ExtResource("1_3vyb7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-44, -23, -44, -16, -49, -12, -49, 8, -43, 11, -43, 21, -29, 21, -29, 15, 8, 15, 17, 5, 24, 5, 25, 21, 39, 21, 40, 19, 52, 18, 53, 12, 51, 3, 52, -2, 51, -7, 53, -21, 40, -23, 39, -26, 25, -25, 25, -17, 27, -15, 17, -8, 8, -20, -28, -20, -29, -25, -43, -25)
