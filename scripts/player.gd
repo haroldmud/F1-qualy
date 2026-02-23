@@ -25,7 +25,6 @@ func _physics_process(delta: float) -> void:
 
 	current_speed = clamp(current_speed, -MAX_SPEED, MAX_SPEED)
 	
-	
 	# Steering only if moving
 	if abs(current_speed) > 5:
 		if Input.is_action_pressed("left"):
