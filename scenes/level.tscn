@@ -58,5 +58,9 @@ polygon = PackedVector2Array(166.9232, 80.78027, 466.4379, 88.17998, 247.42517, 
 [node name="MajroCrash1" type="CollisionPolygon2D" parent="Crash"]
 polygon = PackedVector2Array(-501, -566, -477, -592, -454, -569, -373, -396, -306, -346, -206, -334, -196, 342, -165, 420, -119, 462, -78, 491, 28, 502, 148, 450, 202, 352, 294, 23, 334, -43, 362, -72, 395, -77, 484, 1361, 451, 1413, 407, 1456, 341, 1468, 303, 1427, 277, 1350, 227, 963, 177, 872, 70, 832, -39, 865, -111, 935, -247, 1639, -276, 1671, -313, 1593, -313, 1022, -370, 912, -504, 868)
 
+[node name="RecoveryTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
 [connection signal="body_entered" from="Crash" to="Crash" method="_on_body_entered"]
+[connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]

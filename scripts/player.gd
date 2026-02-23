@@ -14,6 +14,10 @@ const FRICTION = 500.0
 const ROTATION_SPEED = 2.5
 
 var current_speed = 0.0
+var start_forward : Vector2
+
+func _ready() -> void:
+	start_forward = Vector2.RIGHT.rotated(rotation)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("forward"):
@@ -31,6 +35,7 @@ func _physics_process(delta: float) -> void:
 			rotation -= ROTATION_SPEED * delta
 		if Input.is_action_pressed("right"):
 			rotation += ROTATION_SPEED * delta
+			var movement_dir = velocity.normalized()
 
 	var direction = Vector2.RIGHT.rotated(rotation)
 	velocity = direction * current_speed
