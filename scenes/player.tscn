@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cqind2rv578at" path="res://assets/RacingCar.png" id="1_3vyb7"]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 8
 
 [node name="Car" type="Sprite2D" parent="."]
 rotation = -1.5707964
