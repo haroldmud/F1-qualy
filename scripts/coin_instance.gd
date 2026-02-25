@@ -2,21 +2,22 @@ extends Area2D
 
 var player_node : Node2D
 var collect := 1
-signal coin_collision
-
 
 func _ready():
-	# Assign the player node (or game manager)
-	player_node =get_tree().current_scene.get_node("Player")
-	
+	player_node = get_tree().current_scene.get_node("Player")
+	# Connect the signal when the coin is ready
+	body_entered.connect(_on_body_entered)
+
 func _process(delta: float) -> void:
-	print(player_node.coins_collected)
+	#print(player_node.coins_collected)
+	pass
 
 func _on_body_entered(body: Node2D) -> void:
-	get_tree().call_group("coins", "set_coins", 1)
 	if body != player_node:
 		return
+	
+	# Increment the player's coin count
+	player_node.coins_collected += 1
+	
 	$Coin.visible = false
-	if $CollisionShape2D:
-		$CollisionShape2D.set_deferred("disabled", true)
-		coin_collision.emit("collision happenned")
+	$CoinCollisionShape.set_deferred("disabled", true)

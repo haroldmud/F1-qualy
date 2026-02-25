@@ -1,17 +1,102 @@
-[gd_scene load_steps=10 format=3 uid="uid://8tmgt00yc6a3"]
+[gd_scene load_steps=13 format=3 uid="uid://8tmgt00yc6a3"]
 
 [ext_resource type="Script" uid="uid://1crl7nopt4jt" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="Texture2D" uid="uid://3btsldktxokk" path="res://assets/city.png" id="1_ppgk2"]
 [ext_resource type="Texture2D" uid="uid://0boxs1e5f3qk" path="res://assets/mytrack2d.png" id="1_w8frs"]
 [ext_resource type="Texture2D" uid="uid://sva8u1qa4mas" path="res://assets/finishline.png" id="2_mx8sn"]
+[ext_resource type="Texture2D" uid="uid://qfx32rf4qak" path="res://assets/icons/coincollection.png" id="2_olg7q"]
+[ext_resource type="Texture2D" uid="uid://cim6wace7el8x" path="res://assets/icons/chequered-flag.png" id="3_t1rx8"]
 [ext_resource type="PackedScene" uid="uid://bibnqau26hlak" path="res://scenes/player.tscn" id="3_w8frs"]
 [ext_resource type="Script" uid="uid://qd6s2vg7u1ji" path="res://scripts/player.gd" id="4_mx8sn"]
 [ext_resource type="Script" uid="uid://d3kbxoj0x7nyi" path="res://scripts/crash.gd" id="7_klq6b"]
 [ext_resource type="Script" uid="uid://b0yk0m4ysexfa" path="res://scripts/coin_area.gd" id="8_8c41q"]
 [ext_resource type="PackedScene" uid="uid://dqh8uiruxcj5m" path="res://scenes/coin_instance.tscn" id="8_b121j"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c41q"]
+size = Vector2(359.824, 49.998047)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_2r41h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreMargin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_right = 71.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/ScoreMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0000"
+
+[node name="HealthMargin" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CoinsMargin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -71.0
+offset_right = 106.0
+offset_bottom = -24.0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CoinsMargin"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CoinsMargin/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+texture = ExtResource("2_olg7q")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CoinsMargin/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="LapsMargin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = 3.0000005
+offset_right = -76.0
+offset_bottom = 50.0
+grow_horizontal = 0
+scale = Vector2(1.7253048, 1.7479463)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LapsMargin"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LapsMargin/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+texture = ExtResource("3_t1rx8")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/LapsMargin/HBoxContainer"]
+layout_mode = 2
+text = "0/2"
 
 [node name="city" type="Sprite2D" parent="."]
 position = Vector2(134, 215)
@@ -29,12 +114,6 @@ position = Vector2(723, 135)
 scale = Vector2(2.6081083, 2.541587)
 texture = ExtResource("1_w8frs")
 
-[node name="FinishLine" type="Sprite2D" parent="Circuit/Track"]
-position = Vector2(13.047809, 135.80855)
-rotation = 1.5707964
-scale = Vector2(0.11411366, 0.12516978)
-texture = ExtResource("2_mx8sn")
-
 [node name="OutterTrackLimit" type="CollisionPolygon2D" parent="Circuit"]
 position = Vector2(723, 135)
 scale = Vector2(2.8, 2.729)
@@ -43,10 +122,28 @@ polygon = PackedVector2Array(-176.40161, -40.65625, -190.55957, -59.411697, -201
 [node name="InnerTrackLimit" type="CollisionPolygon2D" parent="Circuit"]
 polygon = PackedVector2Array(55.641052, 406.9846, 71.03113, 408.21786, 880.19434, 398.35153, 925.7727, 337.9205, 1001, 296, 1320.5875, 281.80594, 1357.2869, 279.956, 1343.6726, 264.53992, 916.8938, 170.19351, 884.3378, 133.81157, 870.1316, 51.181362, 899.7279, -22.199188, 964.24786, -48.714867, 1185.0364, -77.08045, 1220.552, -86.3301, 1243.0452, -98.04635, 1254.2917, -124.562004, 1234.7582, -164.6438, 1206.9377, -183.75977, 377.64893, -136.27817, 368.17813, -123.32867, 389.48746, -103.59609, 417.89993, -88.79664, 615.60333, -38.23191, 694.32947, -24.04911, 720.37427, 61.664307, 714.45496, 141.21129, 673.61206, 213.35855, 620.33875, 233.7078, 220.19656, 245.42404, 202.43878, 306.47174, 170.47476, 347.1702, 84.64545, 381.08554, 57.41684, 392.18515, 49.7218, 398.3516, 48.537933, 400.2015, 48.537933, 395.26837, 55.049133, 389.10193, 69.84729, 381.08554, 89.38086, 373.06918, 115.4256, 363.20288, 146.2058, 350.25342, 168.69899, 341.00375, 188.23256, 302.15524, 198.8872, 283.03928, 204.21455, 252.20712, 207.17418, 243.57413, 212.50153, 234.32446, 224.93198, 232.47452, 594.29395, 228.77466, 604.3567, 228.158, 620.33875, 231.85786, 645.79156, 216.44179, 662.9574, 208.42542, 678.34753, 193.00934, 691.9618, 162.79381, 701.4326, 136.89479, 704.9842, 114.69563, 702.02454, 85.096756, 699.06494, 56.114517, 691.3699, 24.049065, 680.1233, -8.016388, 656.4462, -22.19918, 611.45984, -34.53205, 438.02542, -71.53063, 392.4471, -88.18, 377.64893, -105.44602, 367.58618, -111.61245, 362.85077, -117.16224, 360.4831, -125.79525, 365.81042, -133.81161, 374.6893, -141.82797, 1206.3457, -194.85934, 1225.8794, -187.45963, 1238.9016, -172.04352, 1246.5967, -159.09402, 1260.2109, -134.42828, 1260.803, -119.012215, 1259.0271, -104.829414, 1251.3322, -87.56341, 1230.0227, -77.08045, 1197.4668, -69.064095, 963.064, -38.231926, 923.40497, -12.332901, 900.3198, 22.815773, 889.66516, 59.81437, 897.3602, 90.64653, 905.6472, 111.612404, 911.56647, 139.36136, 935.2435, 153.54416, 961.8802, 172.04346, 1350.7758, 258.3735, 1360.8385, 265.77322, 1370.3093, 275.6395, 1370.3093, 287.97238, 1327.0986, 293.52216, 1005.0908, 304.62177, 969.57526, 319.4212, 949.4497, 331.13742, 932.2839, 344.0869, 922.81305, 355.80316, 913.3422, 372.4525, 907.423, 383.5521, 896.7683, 390.33517, 883.154, 403.9013, 72.215, 411.30106, 59.784546, 410.68445, 50.90564, 405.13467, 49.129852, 400.81818, 50.90564, 397.11832)
 
+[node name="FinishLineArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="FinishLine" type="Sprite2D" parent="FinishLineArea"]
+position = Vector2(-619.4329, 604.3186)
+rotation = -3.133165
+scale = Vector2(0.47033647, 0.5515153)
+texture = ExtResource("2_mx8sn")
+
+[node name="FinishLineCollision" type="CollisionShape2D" parent="FinishLineArea"]
+position = Vector2(-619.5, 604.5)
+rotation = -3.133165
+scale = Vector2(0.4703364, 0.55151534)
+shape = SubResource("RectangleShape2D_8c41q")
+one_way_collision = true
+one_way_collision_margin = 0.1
+
 [node name="Player" parent="." instance=ExtResource("3_w8frs")]
 position = Vector2(-606, 725)
 rotation = -1.5707964
-collision_mask = 11
+collision_mask = 0
 script = ExtResource("4_mx8sn")
 
 [node name="Crash" type="Area2D" parent="."]
@@ -74,14 +171,15 @@ script = ExtResource("8_8c41q")
 coin_scene = ExtResource("8_b121j")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CoinArea"]
-polygon = PackedVector2Array(-653, -680, -542, -767, -429, -781, -339, -706, -280, -594, -257, -518, -216, -423, -137, -356, -147, -204, -143, 61, -135, 272, 2, 415, 204, -196, 321, -252, 445, -256, 577, -165, 669, 1392, 626, 1515, 471, 1635, 309, 1655, 195, 1301, 65, 980, 5, 992, -26, 1090, -231, 1716, -298, 1720, -350, 1624, -393, 1542, -463, 1427, -500, 1093, -600, 1030, -607, 878, -673, -626, -660, -662, -630, -655, -642, -628, -645, -583, -576, 850, -579, 1000, -537, 1032, -489, 1064, -469, 1107, -471, 1181, -471, 1307, -462, 1385, -339, 1614, -306, 1691, -277, 1709, -245, 1696, -220, 1658, -48, 1040, -7, 961, 30, 923, 74, 936, 102, 983, 131, 1036, 143, 1134, 212, 1278, 316, 1601, 366, 1614, 426, 1614, 492, 1582, 523, 1548, 536, 1504, 595, 1460, 630, 1385, 639, 1294, 571, -44, 553, -147, 485, -204, 434, -234, 325, -228, 221, -175, 153, 18, 87, 217, 53, 340, 13, 428, -62, 387, -136, 294, -154, 199, -157, -342, -222, -392, -304, -588, -354, -695, -429, -755, -537, -742, -624, -671)
+position = Vector2(-3, -6)
+polygon = PackedVector2Array(-653, -680, -542, -767, -429, -781, -339, -706, -280, -594, -257, -518, -216, -423, -137, -356, -147, -204, -143, 61, -135, 272, 2, 415, 204, -196, 321, -252, 445, -256, 577, -165, 669, 1392, 626, 1515, 471, 1635, 309, 1655, 195, 1301, 65, 980, 5, 992, -26, 1090, -231, 1716, -298, 1720, -350, 1624, -393, 1542, -463, 1427, -500, 1093, -600, 1030, -563, 828, -651, -591, -660, -662, -630, -655, -642, -628, -629, -582, -554, 828, -579, 1000, -537, 1032, -489, 1064, -469, 1107, -471, 1181, -471, 1307, -462, 1385, -339, 1614, -306, 1691, -277, 1709, -245, 1696, -220, 1658, -48, 1040, -7, 961, 30, 923, 74, 936, 102, 983, 131, 1036, 143, 1134, 212, 1278, 316, 1601, 366, 1614, 426, 1614, 492, 1582, 523, 1548, 536, 1504, 595, 1460, 630, 1385, 639, 1294, 571, -44, 553, -147, 485, -204, 434, -234, 325, -228, 221, -175, 153, 18, 87, 217, 53, 340, 13, 428, -62, 387, -136, 294, -154, 199, -157, -342, -222, -392, -304, -588, -354, -695, -429, -755, -537, -742, -624, -671)
 
 [node name="CoinInstance" parent="." instance=ExtResource("8_b121j")]
 position = Vector2(-639, -507)
 rotation = 0.0041108127
 
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
+[connection signal="body_exited" from="FinishLineArea" to="." method="_on_finish_line_area_body_exited"]
 [connection signal="body_entered" from="Crash" to="Crash" method="_on_body_entered"]
 [connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
 [connection signal="area_entered" from="CoinInstance" to="." method="_on_coin_instance_area_entered"]
-[connection signal="coin_collision" from="CoinInstance" to="." method="_on_coin_instance_coin_collision"]

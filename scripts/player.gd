@@ -7,7 +7,7 @@ var correcting_rotation := false
 const KNOCKBACK_DAMPING = 1500.0
 const ROTATION_CORRECT_SPEED = 6.0
 
-const MAX_SPEED = 300.0
+var MAX_SPEED = 300.0
 const ACCELERATION = 600.0
 const BRAKE_FORCE = 1200.0
 const FRICTION = 500.0
@@ -49,7 +49,6 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.RIGHT.rotated(rotation) * current_speed
 		move_and_slide()
 		return
-	print(coins_collected)
 	
 	if Input.is_action_pressed("forward"):
 		current_speed += ACCELERATION * delta
@@ -57,8 +56,11 @@ func _physics_process(delta: float) -> void:
 		current_speed -= BRAKE_FORCE * delta
 	else:
 		current_speed = move_toward(current_speed, 0, FRICTION * delta)
-
+	
+	MAX_SPEED = 300 + (coins_collected * 10) 
 	current_speed = clamp(current_speed, -MAX_SPEED, MAX_SPEED)
+	
+	$"../CanvasLayer/CoinsMargin/HBoxContainer/Label".text = str(coins_collected)
 	
 	# Steering only if moving
 	if abs(current_speed) > 5:
@@ -70,10 +72,8 @@ func _physics_process(delta: float) -> void:
 
 	var direction = Vector2.RIGHT.rotated(rotation)
 	velocity = direction * current_speed
-	#print("fasdasdfa ",coins_collected)
 	
 	move_and_slide()
 	
 func set_coins(coins :=1):
 	coins_collected += coins
-	

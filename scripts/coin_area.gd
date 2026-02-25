@@ -3,7 +3,6 @@ extends Area2D
 @export var coin_scene : PackedScene
 @export var coin_count := 20
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_coins()
