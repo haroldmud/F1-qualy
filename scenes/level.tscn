@@ -79,10 +79,9 @@ polygon = PackedVector2Array(-653, -680, -542, -767, -429, -781, -339, -706, -28
 [node name="CoinInstance" parent="." instance=ExtResource("8_b121j")]
 position = Vector2(-639, -507)
 rotation = 0.0041108127
-collision_layer = 8
-collision_mask = 16
 
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
 [connection signal="body_entered" from="Crash" to="Crash" method="_on_body_entered"]
 [connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
 [connection signal="area_entered" from="CoinInstance" to="." method="_on_coin_instance_area_entered"]
+[connection signal="coin_collision" from="CoinInstance" to="." method="_on_coin_instance_coin_collision"]

@@ -33,3 +33,7 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 		
 func _on_recovery_timer_timeout() -> void:
 	is_collided = false
+
+
+func _on_coin_instance_coin_collision(somesome) -> void:
+	print(somesome)

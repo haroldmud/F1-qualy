@@ -13,10 +13,10 @@ func _process(delta: float) -> void:
 	print(player_node.coins_collected)
 
 func _on_body_entered(body: Node2D) -> void:
-	coin_collision.emit()
 	get_tree().call_group("coins", "set_coins", 1)
 	if body != player_node:
 		return
 	$Coin.visible = false
 	if $CollisionShape2D:
 		$CollisionShape2D.set_deferred("disabled", true)
+		coin_collision.emit("collision happenned")
