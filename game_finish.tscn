@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://bep7m274ixcov"]
+
+[ext_resource type="Texture2D" uid="uid://0boxs1e5f3qk" path="res://assets/mytrack2d.png" id="1_hm23b"]
+[ext_resource type="Script" uid="uid://c3d03d0ndbh5r" path="res://scripts/game_finish.gd" id="1_oo4fw"]
+
+[node name="GameFinish" type="CanvasLayer"]
+script = ExtResource("1_oo4fw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = -0.021000002
+anchor_top = -0.060000002
+offset_left = -185.808
+offset_top = -452.12
+offset_right = 1332.0
+offset_bottom = 688.0
+texture = ExtResource("1_hm23b")
+
+[node name="CenterContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -24.5
+offset_right = 51.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverMargin" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.4267048, 0.6937514, 0.920794, 1)
+theme_override_font_sizes/font_size = 80
+text = "GAME OVER
+"
+
+[node name="TimeMargin" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/TimeMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.16828066, 0.78492117, 0.82220936, 1)
+theme_override_font_sizes/font_size = 40
+text = "Time: DNF"
+
+[node name="ScoreMargin" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="CenterContainer/ScoreMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.29386607, 0.8134888, 0.85237527, 1)
+theme_override_font_sizes/font_size = 30
+text = "Score: 213"
+
+[node name="RestartMargin" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -40.0
+offset_right = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="RestartMargin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8486747, 0.1834665, 0.76756257, 1)
+theme_override_colors/font_outline_color = Color(0.8189567, 0.7549339, 0.7891289, 1)
+theme_override_font_sizes/font_size = 28
+text = "Click on Enter or Space to restart"

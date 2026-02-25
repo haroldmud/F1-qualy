@@ -37,7 +37,7 @@ func _start_reverse_timer() -> void:
 
 func disable_input(seconds: float) -> void:
 	input_disabled = true
-	await get_tree().create_timer(seconds).timeout
+	#await get_tree().create_timer(seconds).timeout
 	input_disabled = false 
 
 func _ready() -> void:

@@ -12,13 +12,19 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_elapsed += delta
-	
+	Global.score = time_elapsed * get_tree().current_scene.get_node("Player").coins_collected
 	var minutes = int(time_elapsed / 60)
 	var seconds = int(time_elapsed) % 60
 	var milliseconds = int((time_elapsed - int(time_elapsed)) * 100)
+	Global.time = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
 	
 	$UI/ScoreMargin/Label.text = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
 	$UI/LapsMargin/HBoxContainer/Label.text = str(lap) + "/2"
+	
+	if lap > 2:
+		Global.won = true
+		get_tree().change_scene_to_file("res://game_finish.tscn")
+		lap = 2
 
 func _on_circuit_body_entered(body: Node2D) -> void:
 	is_collided = true
@@ -31,7 +37,7 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 	if health >= 0:
 		get_tree().call_group("ui", "set_health", health)
 	elif health < 0:
-		print("Nigga, you died")
+		get_tree().change_scene_to_file("res://game_finish.tscn")
 	
 	if body.has_method("disable_input"):
 		body.disable_input(1.5)
@@ -48,7 +54,6 @@ func _on_recovery_timer_timeout() -> void:
 	is_collided = false
 
 func _on_coin_instance_coin_collision(somesome) -> void:
-	#print(somesome) -  this is for the amount of coins collected
 	pass
 
 func _on_finish_line_area_body_exited(body: Node2D) -> void:

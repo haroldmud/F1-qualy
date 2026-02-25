@@ -11,4 +11,5 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("MAJOR CRASH DETECTED")
+	#get_tree().change_scene_to_file("res://game_finish.tscn") 
+	pass
