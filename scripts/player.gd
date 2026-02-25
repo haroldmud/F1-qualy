@@ -60,7 +60,6 @@ func _physics_process(delta: float) -> void:
 	MAX_SPEED = 300 + (coins_collected * 10) 
 	current_speed = clamp(current_speed, -MAX_SPEED, MAX_SPEED)
 	
-	$"../CanvasLayer/CoinsMargin/HBoxContainer/Label".text = str(coins_collected)
 	
 	# Steering only if moving
 	if abs(current_speed) > 5:

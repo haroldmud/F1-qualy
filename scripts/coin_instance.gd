@@ -9,9 +9,10 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 
 func _process(delta: float) -> void:
-	#print(player_node.coins_collected)
-	pass
-
+	#$"../UI".text = str(player_node.coins_collected)
+	print("oiqurweoiquer", player_node.coins_collected)
+	get_tree().call_group("ui", "set_coins", player_node.coins_collected)
+	
 func _on_body_entered(body: Node2D) -> void:
 	if body != player_node:
 		return
