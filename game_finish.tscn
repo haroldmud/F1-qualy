@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bep7m274ixcov"]
+[gd_scene load_steps=5 format=3 uid="uid://bep7m274ixcov"]
 
 [ext_resource type="Texture2D" uid="uid://0boxs1e5f3qk" path="res://assets/mytrack2d.png" id="1_hm23b"]
 [ext_resource type="Script" uid="uid://c3d03d0ndbh5r" path="res://scripts/game_finish.gd" id="1_oo4fw"]
+[ext_resource type="AudioStream" uid="uid://d2xy2kxynu8vr" path="res://assets/audio/Damtaro - Start (freetouse.com).mp3" id="3_g4i1c"]
+[ext_resource type="FontFile" uid="uid://4qegklxmkp52" path="res://assets/fonts/subatomic.tsoonami.ttf" id="3_n34lo"]
 
 [node name="GameFinish" type="CanvasLayer"]
 script = ExtResource("1_oo4fw")
@@ -36,6 +38,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.4267048, 0.6937514, 0.920794, 1)
+theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 80
 text = "GAME OVER
 "
@@ -47,6 +50,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.16828066, 0.78492117, 0.82220936, 1)
+theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 40
 text = "Time: DNF"
 
@@ -57,7 +61,8 @@ size_flags_vertical = 8
 [node name="Label" type="Label" parent="CenterContainer/ScoreMargin"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.29386607, 0.8134888, 0.85237527, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.18039216, 0.21176471, 1)
+theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 30
 text = "Score: 213"
 
@@ -78,5 +83,9 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8486747, 0.1834665, 0.76756257, 1)
 theme_override_colors/font_outline_color = Color(0.8189567, 0.7549339, 0.7891289, 1)
+theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 28
 text = "Click on Enter or Space to restart"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g4i1c")

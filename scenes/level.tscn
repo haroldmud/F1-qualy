@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8tmgt00yc6a3"]
+[gd_scene load_steps=14 format=3 uid="uid://8tmgt00yc6a3"]
 
 [ext_resource type="Script" uid="uid://1crl7nopt4jt" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="Texture2D" uid="uid://3btsldktxokk" path="res://assets/city.png" id="1_ppgk2"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://d3kbxoj0x7nyi" path="res://scripts/crash.gd" id="7_klq6b"]
 [ext_resource type="Script" uid="uid://b0yk0m4ysexfa" path="res://scripts/coin_area.gd" id="8_8c41q"]
 [ext_resource type="PackedScene" uid="uid://dqh8uiruxcj5m" path="res://scenes/coin_instance.tscn" id="8_b121j"]
+[ext_resource type="AudioStream" uid="uid://cgcy1sv03ufed" path="res://assets/audio/bump.wav" id="11_t1rx8"]
+[ext_resource type="AudioStream" uid="uid://d102xm1rofccp" path="res://assets/audio/art deco instrumental but it’s slightly slowed at the majestical part.mp3" id="12_8iemx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8c41q"]
 size = Vector2(359.824, 49.998047)
@@ -98,6 +100,13 @@ polygon = PackedVector2Array(-653, -680, -542, -767, -429, -781, -339, -706, -28
 [node name="CoinInstance" parent="." instance=ExtResource("8_b121j")]
 position = Vector2(-639, -507)
 rotation = 0.0041108127
+
+[node name="CrashAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_t1rx8")
+
+[node name="Sondtrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_8iemx")
+volume_db = -40.0
 
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
 [connection signal="body_exited" from="FinishLineArea" to="." method="_on_finish_line_area_body_exited"]

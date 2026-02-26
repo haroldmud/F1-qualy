@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bibnqau26hlak"]
+[gd_scene load_steps=3 format=3 uid="uid://bibnqau26hlak"]
 
 [ext_resource type="Texture2D" uid="uid://cqind2rv578at" path="res://assets/RacingCar.png" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://dlovwotud2fmd" path="res://assets/audio/engine.wav" id="2_g2els"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
@@ -15,3 +16,6 @@ texture = ExtResource("1_3vyb7")
 
 [node name="CarCollisionShape" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-44, -23, -44, -16, -49, -12, -49, 8, -43, 11, -43, 21, -29, 21, -29, 15, 8, 15, 17, 5, 24, 5, 25, 21, 39, 21, 40, 19, 52, 18, 53, 12, 51, 3, 52, -2, 51, -7, 53, -21, 40, -23, 39, -26, 25, -25, 25, -17, 27, -15, 17, -8, 8, -20, -28, -20, -29, -25, -43, -25)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_g2els")

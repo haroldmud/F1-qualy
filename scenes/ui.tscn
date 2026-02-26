@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://drnic87uc5aqw"]
+[gd_scene load_steps=7 format=3 uid="uid://drnic87uc5aqw"]
 
 [ext_resource type="Texture2D" uid="uid://qfx32rf4qak" path="res://assets/icons/coincollection.png" id="1_gdt2y"]
 [ext_resource type="Script" uid="uid://crsvccju2jru5" path="res://scenes/ui.gd" id="1_wm3ai"]
+[ext_resource type="FontFile" uid="uid://4qegklxmkp52" path="res://assets/fonts/subatomic.tsoonami.ttf" id="2_8dubc"]
 [ext_resource type="Texture2D" uid="uid://cim6wace7el8x" path="res://assets/icons/chequered-flag.png" id="2_wm3ai"]
 [ext_resource type="Texture2D" uid="uid://ba5wmtylparvg" path="res://assets/icons/battery.png" id="3_8dubc"]
 [ext_resource type="Texture2D" uid="uid://0whyn3jbwrd4" path="res://assets/icons/rectangle.png" id="4_p7vwb"]
@@ -22,6 +23,7 @@ theme_override_constants/margin_top = 4
 [node name="Label" type="Label" parent="ScoreMargin"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_8dubc")
 text = "00:00:00"
 
 [node name="HealthMargin" type="MarginContainer" parent="."]
@@ -55,6 +57,7 @@ expand_mode = 3
 
 [node name="Label" type="Label" parent="CoinsMargin/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8dubc")
 text = "0"
 
 [node name="LapsMargin" type="MarginContainer" parent="."]
@@ -85,6 +88,7 @@ expand_mode = 3
 
 [node name="Label" type="Label" parent="LapsMargin/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8dubc")
 text = "0/2"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
