@@ -8,7 +8,7 @@ var health := 5
 func _ready() -> void:
 	time_elapsed = 0.0
 	$Sondtrack.play()
-	$Sondtrack.volume_db = -10
+	$Sondtrack.volume_db = -20
 	get_tree().call_group("ui", "set_health", health)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,6 +41,7 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 	elif health < 0:
 		Global.score = get_tree().current_scene.get_node("Player").coins_collected * 10
 		get_tree().change_scene_to_file("res://game_finish.tscn")
+		Global.won = false
 	
 	if body.has_method("disable_input"):
 		body.disable_input(1.5)
