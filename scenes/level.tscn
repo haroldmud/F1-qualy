@@ -70,6 +70,8 @@ scale = Vector2(1.2, 1.2)
 collision_mask = 0
 script = ExtResource("4_mx8sn")
 
+[node name="CollisionTimer" type="Timer" parent="Player"]
+
 [node name="Crash" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 16
@@ -82,7 +84,10 @@ scale = Vector2(1.6893996, 1.6216831)
 polygon = PackedVector2Array(147.98155, 70.29734, 387.11978, 80.780266, 221.97234, 31.448807, 171.06668, -36.99859, 151.5331, -126.41187, 157.45236, -207.8088, 174.61823, -254.6737, 208.35802, -290.43903, 303.06622, -308.93832, 406.65332, -315.10474, 613.2356, -324.3544, 1203.3861, -366.9028, 1290.9912, -356.4199, 1356.6951, -337.9206, 1401.0895, -294.13895, 1445.484, -241.1076, 1470.9368, -120.862144, 1443.1162, -28.365654, 1401.0895, 27.132248, 1337.7534, 49.331413, 1240.0854, 80.16358, 1469.7529, 122.095314, 1489.8784, 144.29448, 1556.1742, 151.07755, 1602.9364, 214.59181, 1594.0575, 376.15234, 1565.0531, 435.3501, 1492.2461, 469.8821, 1430.0939, 475.43192, 1092.6958, 476.66522, 1080.2654, 508.11404, 1030.5437, 575.9448, 969.57526, 598.144, 13.0224, 592.59424, -56.23297, 572.245, -111.282135, 521.6803, -166.3313, 458.166, -158.63623, 371.2193, -114.83371, 309.55496, 13.022369, 224.45816, 14.798157, 165.26042, 48.537933, 87.563354, -235.58667, 120.86211, -235.58667, 796.7031, 1679.8867, 782.52026, 1664.4967, -519.21375, -221.38043, -511.19733, -235.58667, 121.47875, 75.76654, 75.84714)
 
 [node name="MajorCrash1" type="CollisionPolygon2D" parent="Crash"]
-polygon = PackedVector2Array(-467, -448, -455, -462, -440, -487, -382, -347, -307, -304, -243, -281, -236, 353, -237, 421, -202, 489, -118, 537, 14, 579, 193, 524, 235, 440, 322, 47, 356, 4, 372, -6, 388, -4, 447, 1337, 431, 1380, 399, 1421, 339, 1437, 313, 1406, 291, 1350, 249, 946, 208, 845, 68, 785, -75, 824, -130, 887, -268, 1511, -288, 1600, -302, 1582, -313, 1022, -363, 906, -471, 797)
+polygon = PackedVector2Array(-468, -423, -468, -462, -442, -472, -382, -347, -307, -304, -243, -281, -236, 353, -237, 421, -202, 489, -118, 537, 14, 579, 193, 524, 235, 440, 322, 47, 356, 4, 372, -6, 388, -4, 447, 1337, 431, 1380, 399, 1421, 339, 1437, 313, 1406, 291, 1350, 249, 946, 208, 845, 68, 785, -75, 824, -130, 887, -268, 1511, -288, 1600, -302, 1582, -313, 1022, -363, 906, -471, 797)
+
+[node name="MajorCrashTimer" type="Timer" parent="Crash"]
+wait_time = 3.0
 
 [node name="RecoveryTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -108,8 +113,14 @@ stream = ExtResource("11_t1rx8")
 stream = ExtResource("12_8iemx")
 volume_db = -40.0
 
+[node name="FinishLineTimer" type="Timer" parent="."]
+wait_time = 20.0
+
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
 [connection signal="body_exited" from="FinishLineArea" to="." method="_on_finish_line_area_body_exited"]
+[connection signal="timeout" from="Player/CollisionTimer" to="Player" method="_on_collision_timer_timeout"]
 [connection signal="body_entered" from="Crash" to="Crash" method="_on_body_entered"]
+[connection signal="timeout" from="Crash/MajorCrashTimer" to="Crash" method="_on_major_crash_timer_timeout"]
 [connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
 [connection signal="area_entered" from="CoinInstance" to="." method="_on_coin_instance_area_entered"]
+[connection signal="timeout" from="FinishLineTimer" to="." method="_on_finish_line_timer_timeout"]

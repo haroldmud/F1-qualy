@@ -5,6 +5,8 @@ var lap := 0
 var time_elapsed := 0.0
 var health := 5
 
+var finish_line_crossed := false
+
 func _ready() -> void:
 	time_elapsed = 0.0
 	$Sondtrack.play()
@@ -22,6 +24,9 @@ func _process(delta: float) -> void:
 	
 	$UI/ScoreMargin/Label.text = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
 	$UI/LapsMargin/HBoxContainer/Label.text = str(lap) + "/2"
+	
+	#print("collision happened: ", Global.car_collided)
+	
 	if lap > 2:
 		Global.won = true
 		get_tree().change_scene_to_file("res://game_finish.tscn")
@@ -32,9 +37,10 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 	health -= 1
 	$CrashAudio.play()
 	if body is CharacterBody2D:
-		var push_back = -body.velocity.normalized() * 80
-		body.position += push_back
-		body.velocity = push_back
+		body.velocity = Vector2.ZERO
+		if body.has_method("set"):
+			body.current_speed = 0.0
+		Global.car_collided = true
 	
 	if health >= 0:
 		get_tree().call_group("ui", "set_health", health)
@@ -43,14 +49,14 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 		get_tree().change_scene_to_file("res://game_finish.tscn")
 		Global.won = false
 		
-	if body.rotation_degrees > -90 and body.rotation_degrees < 0 :
-		body.rotation_degrees -= 30
-	elif body.rotation_degrees < 90  and body.rotation_degrees > 0:
-		body.rotation_degrees +=30
-	elif body.rotation_degrees < -90:
-		body.rotation_degrees +=30
-	elif body.rotation_degrees > 90:
-			body.rotation_degrees -= 30
+	#if body.rotation_degrees > -90 and body.rotation_degrees < 0 :
+		#body.rotation_degrees -= 30
+	#elif body.rotation_degrees < 90  and body.rotation_degrees > 0:
+		#body.rotation_degrees +=30
+	#elif body.rotation_degrees < -90:
+		#body.rotation_degrees +=30
+	#elif body.rotation_degrees > 90:
+			#body.rotation_degrees -= 30
 		
 func _on_recovery_timer_timeout() -> void:
 	is_collided = false
@@ -59,7 +65,10 @@ func _on_coin_instance_coin_collision(somesome) -> void:
 	pass
 
 func _on_finish_line_area_body_exited(body: Node2D) -> void:
-	#if body.velocity.x < 0:
+	if not finish_line_crossed:
 		lap += 1
-	#elif body.velocity.x > 0:
-		#lap -= 1
+		$FinishLineTimer.start()
+		finish_line_crossed = true
+
+func _on_finish_line_timer_timeout() -> void:
+	finish_line_crossed = false
