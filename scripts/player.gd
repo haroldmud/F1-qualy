@@ -16,38 +16,19 @@ const ROTATION_SPEED = 2.5
 var current_speed = 0.0
 var start_forward : Vector2
 
-var input_disabled := false
 var coins_collected := 0 
 
-var reversing := false
-const REVERSE_SPEED = -200.0
-const REVERSE_DURATION = 1.0
 
 var engine_playing := false
-var target_volume := -40.0  # Target volume in dB
-const VOLUME_FADE_SPEED = 20.0  # How fast volume changes
-const MIN_VOLUME = -40.0  # Idle volume (dB)
-const MAX_VOLUME = -20.0  # Full throttle volume (dB)
-
-func apply_reverse_after_collision():
-	reversing = true
-	current_speed = REVERSE_SPEED
-	_start_reverse_timer()
-
-func _start_reverse_timer() -> void:
-	var timer = get_tree().create_timer(REVERSE_DURATION)
-	await timer.timeout
-	reversing = false
-	current_speed = 0
-
-func disable_input(seconds: float) -> void:
-	input_disabled = true
-	input_disabled = false 
+var target_volume := -40.0 
+const VOLUME_FADE_SPEED = 20.0
+const MIN_VOLUME = -40.0 
+const MAX_VOLUME = -20.0
 
 func _ready() -> void:
 	start_forward = Vector2.RIGHT.rotated(rotation)
 	print("Testing audio...")
-	$AudioStreamPlayer2D.volume_db = 0.0  # Full volume
+	$AudioStreamPlayer2D.volume_db = 0.0
 	$AudioStreamPlayer2D.play()
 	print("Playing: ", $AudioStreamPlayer2D.playing)
 	
@@ -56,16 +37,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	if input_disabled:
-		current_speed = move_toward(current_speed, 80, FRICTION * 100 * delta)
-		velocity = Vector2.RIGHT.rotated(rotation) * current_speed
-		move_and_slide()
-		return
-	
-	# Handle engine sound volume
 	if Input.is_action_pressed("forward"):
 		current_speed += ACCELERATION * delta
-		# Increase volume when accelerating
 		target_volume = MAX_VOLUME
 		
 	elif Input.is_action_pressed("brake"):
@@ -93,11 +66,16 @@ func _physics_process(delta: float) -> void:
 	current_speed = clamp(current_speed, -MAX_SPEED, MAX_SPEED)
 	
 	# Steering only if moving
-	if abs(current_speed) > 5:
+	if current_speed > 5:
 		if Input.is_action_pressed("left"):
 			rotation -= ROTATION_SPEED * delta
 		if Input.is_action_pressed("right"):
 			rotation += ROTATION_SPEED * delta
+	elif current_speed < 5:
+		if Input.is_action_pressed("left"):
+			rotation += ROTATION_SPEED * delta 
+		if Input.is_action_pressed("right"):
+			rotation -= ROTATION_SPEED * delta
 
 	var direction = Vector2.RIGHT.rotated(rotation)
 	velocity = direction * current_speed

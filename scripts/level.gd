@@ -34,7 +34,7 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		var push_back = -body.velocity.normalized() * 80
 		body.position += push_back
-		body.velocity = Vector2.ZERO
+		body.velocity = push_back
 	
 	if health >= 0:
 		get_tree().call_group("ui", "set_health", health)
@@ -42,16 +42,14 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 		Global.score = get_tree().current_scene.get_node("Player").coins_collected * 10
 		get_tree().change_scene_to_file("res://game_finish.tscn")
 		Global.won = false
-	
-	if body.has_method("disable_input"):
-		body.disable_input(1.5)
-		if body.rotation_degrees > -90 and body.rotation_degrees < 0 :
-			body.rotation_degrees -= 30
-		elif body.rotation_degrees < 90  and body.rotation_degrees > 0:
-			body.rotation_degrees +=30
-		elif body.rotation_degrees < -90:
-			body.rotation_degrees +=30
-		elif body.rotation_degrees > 90:
+		
+	if body.rotation_degrees > -90 and body.rotation_degrees < 0 :
+		body.rotation_degrees -= 30
+	elif body.rotation_degrees < 90  and body.rotation_degrees > 0:
+		body.rotation_degrees +=30
+	elif body.rotation_degrees < -90:
+		body.rotation_degrees +=30
+	elif body.rotation_degrees > 90:
 			body.rotation_degrees -= 30
 		
 func _on_recovery_timer_timeout() -> void:
