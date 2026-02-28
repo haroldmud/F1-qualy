@@ -4,16 +4,12 @@ var is_collided := false
 var lap := 0
 var time_elapsed := 0.0
 var health := 5
-var is_lap_finished:= false
+var is_lap_two:= false
+var fake_lap := 0
 
 @onready var lap_label: Label = get_tree().current_scene.get_node("UI/LapsMargin/HBoxContainer/Label")
 
 func _ready() -> void:
-	if lap_label:
-		lap_label.text = "nun"
-		print("Label text set successfully!")
-	else:
-		print("Label not found!")
 	time_elapsed = 0.0
 	$Sondtrack.play()
 	$Sondtrack.volume_db = -20
@@ -29,7 +25,10 @@ func _process(delta: float) -> void:
 	Global.time = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
 	
 	$UI/ScoreMargin/Label.text = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
-	$UI/LapsMargin/HBoxContainer/Label.text = str(lap) + "/2"
+	if lap == 2 or is_lap_two:
+		fake_lap = 2
+	print(is_lap_two)
+	$UI/LapsMargin/HBoxContainer/Label.text = str(fake_lap) + "/2"
 
 	if lap > 2:
 		Global.won = true
@@ -65,16 +64,19 @@ func _on_coin_instance_coin_collision(somesome) -> void:
 func _on_finish_line_area_body_exited(body: Node2D) -> void:
 		Global.first_line = true
 		Global.second_line = false
-		is_lap_finished = false
-		$"./UI/LapsMargin/HBoxContainer/Label".text = "nun"
+		
+		if lap == 0:
+			fake_lap = 1
+		
+		if lap == 1:
+			is_lap_two = true
 		
 		if lap == 2:
 			lap = 3
+			
 
 func _on_lap_counter_body_entered(body: Node2D) -> void:
 	if not Global.second_line and Global.first_line:
 		Global.first_line = false
 		
 		lap += 1
-		if not is_lap_finished:
-			is_lap_finished = true

@@ -16,6 +16,7 @@ offset_left = -69.0
 offset_top = -355.0
 offset_right = 7459.0
 offset_bottom = 2552.0
+grow_horizontal = 2
 scale = Vector2(0.20080654, 0.343624)
 texture = ExtResource("2_n34lo")
 
@@ -90,3 +91,17 @@ text = "Click on Enter or Space to restart"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_g4i1c")
+
+[node name="BestScoreMargin" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.5
+offset_right = 85.5
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="BestScoreMargin"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n34lo")
+text = "BEST SCORE: 4355"

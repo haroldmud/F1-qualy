@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("brake"):
 		current_speed -= BRAKE_FORCE * delta
 		car_is_backward = true
-		target_volume = MIN_VOLUME + 10.0  # Slightly higher than idle
+		target_volume = MIN_VOLUME + 10.0
 	
 	elif Input.is_action_pressed("forward"):
 		current_speed += ACCELERATION * delta
