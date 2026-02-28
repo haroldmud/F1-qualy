@@ -97,7 +97,6 @@ func _physics_process(delta: float) -> void:
 func set_coins(coins := 1):
 	coins_collected += coins
 	
-
 func _on_collision_timer_timeout() -> void:
 	Global.car_collided = false
 	collision_time_started = false

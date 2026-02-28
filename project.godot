@@ -58,3 +58,4 @@ brake={
 2d_physics/layer_4="coin"
 2d_physics/layer_5="player"
 2d_physics/layer_6="finish_line"
+2d_physics/layer_7="second_finish_line"
