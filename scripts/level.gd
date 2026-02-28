@@ -4,7 +4,6 @@ var is_collided := false
 var lap := 0
 var time_elapsed := 0.0
 var health := 5
-
 var finish_line_crossed := false
 
 func _ready() -> void:
@@ -66,9 +65,4 @@ func _on_coin_instance_coin_collision(somesome) -> void:
 
 func _on_finish_line_area_body_exited(body: Node2D) -> void:
 	if not finish_line_crossed:
-		lap += 1
-		$FinishLineTimer.start()
 		finish_line_crossed = true
-
-func _on_finish_line_timer_timeout() -> void:
-	finish_line_crossed = false

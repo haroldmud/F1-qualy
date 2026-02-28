@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8tmgt00yc6a3"]
+[gd_scene load_steps=16 format=3 uid="uid://8tmgt00yc6a3"]
 
 [ext_resource type="Script" uid="uid://1crl7nopt4jt" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="Texture2D" uid="uid://3btsldktxokk" path="res://assets/city.png" id="1_ppgk2"]
@@ -12,9 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://dqh8uiruxcj5m" path="res://scenes/coin_instance.tscn" id="8_b121j"]
 [ext_resource type="AudioStream" uid="uid://cgcy1sv03ufed" path="res://assets/audio/bump.wav" id="11_t1rx8"]
 [ext_resource type="AudioStream" uid="uid://d102xm1rofccp" path="res://assets/audio/art deco instrumental but it’s slightly slowed at the majestical part.mp3" id="12_8iemx"]
+[ext_resource type="Script" uid="uid://lpbucw1tepo" path="res://scenes/lap_counter.gd" id="13_64w2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8c41q"]
 size = Vector2(359.824, 49.998047)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64w2a"]
+size = Vector2(20, 237)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_2r41h")
@@ -113,8 +117,12 @@ stream = ExtResource("11_t1rx8")
 stream = ExtResource("12_8iemx")
 volume_db = -40.0
 
-[node name="FinishLineTimer" type="Timer" parent="."]
-wait_time = 20.0
+[node name="LapCounter" type="Area2D" parent="."]
+script = ExtResource("13_64w2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LapCounter"]
+position = Vector2(366, -198)
+shape = SubResource("RectangleShape2D_64w2a")
 
 [connection signal="body_entered" from="Circuit" to="." method="_on_circuit_body_entered"]
 [connection signal="body_exited" from="FinishLineArea" to="." method="_on_finish_line_area_body_exited"]
@@ -123,4 +131,3 @@ wait_time = 20.0
 [connection signal="timeout" from="Crash/MajorCrashTimer" to="Crash" method="_on_major_crash_timer_timeout"]
 [connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
 [connection signal="area_entered" from="CoinInstance" to="." method="_on_coin_instance_area_entered"]
-[connection signal="timeout" from="FinishLineTimer" to="." method="_on_finish_line_timer_timeout"]
