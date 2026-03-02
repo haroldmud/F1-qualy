@@ -35,8 +35,6 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://game_finish.tscn")
 		lap = 2
 	
-	print("the laps are=: ", lap)
-
 func _on_circuit_body_entered(body: Node2D) -> void:
 	is_collided = true
 	health -= 1
