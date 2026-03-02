@@ -1,6 +1,6 @@
 extends Node
 
-
+var is_crash := false
 var time := "DNF"
 var score := 0
 var won := false

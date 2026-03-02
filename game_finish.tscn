@@ -35,15 +35,15 @@ grow_vertical = 2
 
 [node name="GameOverMargin" type="MarginContainer" parent="CenterContainer"]
 layout_mode = 2
+theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="CenterContainer"]
+[node name="Label" type="Label" parent="CenterContainer/GameOverMargin"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.7734326, 0.8802504, 0.977279, 1)
 theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 80
-text = "GAME OVER
-"
+text = "GAME OVER"
 
 [node name="TimeMargin" type="MarginContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -51,7 +51,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CenterContainer/TimeMargin"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.7370698, 0.97192734, 0.9887083, 1)
+theme_override_colors/font_color = Color(0.8676005, 0.28538638, 0.9027358, 1)
 theme_override_fonts/font = ExtResource("3_n34lo")
 theme_override_font_sizes/font_size = 40
 text = "Time: DNF"

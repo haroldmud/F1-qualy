@@ -50,7 +50,7 @@ func _on_circuit_body_entered(body: Node2D) -> void:
 	if health >= 0:
 		get_tree().call_group("ui", "set_health", health)
 	elif health < 0:
-		Global.score = get_tree().current_scene.get_node("Player").coins_collected * 10
+		Global.score = get_tree().current_scene.get_node("Player").coins_collected
 		get_tree().change_scene_to_file("res://game_finish.tscn")
 		Global.won = false
 	

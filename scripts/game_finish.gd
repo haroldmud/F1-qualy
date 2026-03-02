@@ -18,15 +18,21 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Global.won:
-		$CenterContainer/Label.text = "GAME WON 🥳"
+		$CenterContainer/GameOverMargin/Label.text = "GAME WON 🥳"
 		$CenterContainer/TimeMargin/Label.text = "Time: " + Global.time
 		$CenterContainer/ScoreMargin/Label.text = "Score: " + str(Global.score)
 	elif not Global.won:
-		$CenterContainer/Label.text = "GAME LOST 😔 "
+		$CenterContainer/GameOverMargin/Label.text = "GAME LOST 😔 "
+		$CenterContainer/ScoreMargin/Label.text = "Score: " + str(Global.score)
+	
+	if Global.is_crash:
+		$CenterContainer/GameOverMargin/Label.text = "GAME LOST 😔 "
+		$CenterContainer/TimeMargin/Label.text = "🚨 The Car Had a Major Accident 🚨"
 		$CenterContainer/ScoreMargin/Label.text = "Score: " + str(Global.score)
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().change_scene_to_file("res://scenes/level.tscn")
+
 
 # Save the best score to file
 func save_best_score(score: int) -> void:
