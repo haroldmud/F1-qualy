@@ -7,7 +7,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	Global.is_crash = car_crahed
+	if car_crahed:
+		Global.is_crash = car_crahed
 	print("car crashing: ", Global.is_crash)
 
 func _on_body_entered(body: Node2D) -> void:
@@ -16,8 +17,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if not car_crahed:
 		$MajorCrashTimer.start()
 		car_crahed = true
-	Global.score = 0
+		Global.score = 0
 
 func _on_major_crash_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://game_finish.tscn")
 	car_crahed = true
+	Global.score = 0
