@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 	var speed_ratio = abs(current_speed) / MAX_SPEED
 	$AudioStreamPlayer2D.pitch_scale = lerp(0.8, 1.2, speed_ratio)
 
-	MAX_SPEED = 300 + (coins_collected * 10) 
+	MAX_SPEED = 300 + (coins_collected * 20) 
 	current_speed = clamp(current_speed, -MAX_SPEED, MAX_SPEED)
 
 	# NEW: Steering only if moving AND input is not disabled
