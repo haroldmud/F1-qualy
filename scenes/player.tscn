@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bibnqau26hlak"]
 
 [ext_resource type="Texture2D" uid="uid://cqind2rv578at" path="res://assets/RacingCar.png" id="1_3vyb7"]
-[ext_resource type="AudioStream" uid="uid://cxtl1gjap67kv" path="res://assets/audio/soft-engine.mp3" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://c6vw3ljukxkax" path="res://assets/audio/soft-engine.wav" id="2_g2els"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
