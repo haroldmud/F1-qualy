@@ -22,8 +22,8 @@ var engine_playing := false
 var car_is_backward := false
 var target_volume := -40.0 
 const VOLUME_FADE_SPEED = 20.0
-const MIN_VOLUME = -40.0 
-const MAX_VOLUME = -20.0
+const MIN_VOLUME = -10.0 
+const MAX_VOLUME = 1.0
 
 var collision_time_started = false
 var input_disabled := false

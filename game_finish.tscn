@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3d03d0ndbh5r" path="res://scripts/game_finish.gd" id="1_oo4fw"]
 [ext_resource type="Texture2D" uid="uid://bbynetxk6v554" path="res://assets/z1uj_c6ni_221114.jpg" id="2_n34lo"]
-[ext_resource type="AudioStream" uid="uid://d2xy2kxynu8vr" path="res://assets/audio/Damtaro - Start (freetouse.com).mp3" id="3_g4i1c"]
+[ext_resource type="AudioStream" uid="uid://d2xy2kxynu8vr" path="res://assets/audio/GameFinishSound.mp3" id="3_g4i1c"]
 [ext_resource type="FontFile" uid="uid://4qegklxmkp52" path="res://assets/fonts/subatomic.tsoonami.ttf" id="3_n34lo"]
 
 [node name="GameFinish" type="CanvasLayer"]

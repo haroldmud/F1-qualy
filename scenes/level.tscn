@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://b0yk0m4ysexfa" path="res://scripts/coin_area.gd" id="8_8c41q"]
 [ext_resource type="PackedScene" uid="uid://dqh8uiruxcj5m" path="res://scenes/coin_instance.tscn" id="8_b121j"]
 [ext_resource type="AudioStream" uid="uid://cgcy1sv03ufed" path="res://assets/audio/bump.wav" id="11_t1rx8"]
-[ext_resource type="AudioStream" uid="uid://d102xm1rofccp" path="res://assets/audio/art deco instrumental but it’s slightly slowed at the majestical part.mp3" id="12_8iemx"]
+[ext_resource type="AudioStream" uid="uid://c4sy4jaqaxwrv" path="res://assets/audio/backgroundMusic.mp3" id="12_8iemx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8c41q"]
 size = Vector2(640.0524, 49.998047)
@@ -116,7 +116,7 @@ stream = ExtResource("11_t1rx8")
 
 [node name="Sondtrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_8iemx")
-volume_db = -40.0
+volume_db = -20.0
 
 [node name="LapCounter" type="Area2D" parent="."]
 collision_layer = 64
